@@ -20,10 +20,4 @@ const EmpresaSchema = mongoose.Schema({
   }
 });
 
-EmpresaSchema.methods.toJSON = function(){
-  const { __v, password, _id, ...usuario} = this.toObject();
-  usuario.uid = _id;
-  return usuario;
-}
-
-export default mongoose.model('User', UserSchema);
+export default mongoose.model('empresa', EmpresaSchema);
