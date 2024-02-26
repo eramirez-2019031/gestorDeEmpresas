@@ -1,0 +1,11 @@
+{
+  "name": "gestor1",
+  "version": "1.0.0",
+  "description": "Gestor de empresas",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Evan Ramirez",
+  "license": "ISC"
+}
