@@ -5,7 +5,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import { dbConnection } from './mongo.js';
-import userRoutes from '../src/users/user.routes.js';
+import userRoutes from '../src/usuario/user.model.js';
 import authRoutes from '../src/auth/auth.routes.js'
 
 class Server{
@@ -39,7 +39,7 @@ class Server{
 
     listen(){
         this.app.listen(this.port, () => {
-            console.log('Server running on port ', this.port);
+            console.log('Server running on port', this.port);
         });
     }
 }
