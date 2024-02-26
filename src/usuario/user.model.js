@@ -5,12 +5,12 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: [true, "El nombre es obligatorio"],
   },
-  correo: {
+  email: {
     type: String,
     required: [true, "El correo es obligarorio"],
     unique: true,
   },
-  password: {
+  contra: {
     type: String,
     required: [true, "La contraseña es obligaroria"],
   },
