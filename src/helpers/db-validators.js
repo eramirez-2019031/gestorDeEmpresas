@@ -1,4 +1,6 @@
 import Usuario from '../usuario/user.model.js';
+import Empresa from '../empresas/empresas.model.js';
+
 
 export const existenteEmail = async (email = '') => {
     const existeEmail = await Usuario.findOne({email});
@@ -14,3 +16,9 @@ export const existeUsuarioById = async ( id = '') => {
     }
 }
 
+export const existenteEmpresa = async (nombreE = '') => {
+    const existenteEmpresa = await Empresa.findOne({nombreE});
+    if(existenteEmpresa){
+        throw new Error(`El Nombre ${ nombreE } ya fue registrado`);
+    }
+}
