@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { userPost, userGet } from './user.controller.js';
+import { userPost, userGet, userLogin } from './user.controller.js';
 import { existenteEmail, existeUsuarioById } from '../helpers/db-validators.js';
 import { validarCampos } from '../middlewares/validar-campos.js';
 import { validarJWT } from '../middlewares/validar-jwt.js';
@@ -19,6 +19,16 @@ router.post(
     validarCampos,
   ],
   userPost
+);
+
+router.post(
+  "/login",
+  [
+      check('email', 'Este correo no es aceptado, pruebe otro').isEmail(),
+      check('contra', 'la contraseña es obligatoria').not().isEmpty(),
+      validarCampos,
+  ],
+  userLogin
 );
 
 export default router;
