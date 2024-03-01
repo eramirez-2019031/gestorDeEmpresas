@@ -1,0 +1,28 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Empresas Evan",
+    "dateExported": "2024-03-01T17:48:27.762Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "275e4056-81e0-4124-9896-0fd29f20a4bb",
+            "colId": "95e24ba7-dc7e-4c02-8bdb-bb281d2221cb",
+            "containerId": "",
+            "name": "Cuestionario Agregar Empresa",
+            "url": "http://localhost:3000/api/v1/empresa",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-01T17:43:37.493Z",
+            "modified": "2024-03-01T17:43:37.493Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nombreE\": \"guatemax\",\n  \"nivelImpacto\": \"Empresa nivel mundial\",\n  \"años\": \"72\",\n  \"categoria\": \"Lacteos\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
