@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-const Usuario = require("../usuario/user.model");
+import jwt from 'jsonwebtoken';
+import Usuario from '../usuario/user.model.js';
 
-const validarJWT = async (req, res, next) => {
+export const validarJWT = async (req, res, next) => {
   const token = req.header("x-token");
 
   if (!token) {
@@ -33,6 +33,3 @@ const validarJWT = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  validarJWT,
-};

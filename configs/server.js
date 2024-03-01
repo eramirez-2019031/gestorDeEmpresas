@@ -5,13 +5,13 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import { dbConnection } from './mongo.js';
-import userRoutes from '../src/usuario/user.model.js';
+import userRoutes from '../src/usuario/user.routes.js';
 
 class Server{
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
-        this.usuarioPath = '/coffeApi/v1/users'
+        this.usuarioPath = '/api/v1/users'
 
         this.middlewares();
         this.conectarDB();

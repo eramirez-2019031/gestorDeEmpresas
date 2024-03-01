@@ -1,49 +1,24 @@
-const { Router } = require('express');
-const { check } = require('express-validator');
+import { Router } from 'express';
+import { check } from 'express-validator';
+import { userPost, userGet } from './user.controller.js';
+import { existenteEmail, existeUsuarioById } from '../helpers/db-validators.js';
+import { validarCampos } from '../middlewares/validar-campos.js';
+import { validarJWT } from '../middlewares/validar-jwt.js';
 
-const { validarCampos } = require('../middlewares/validar-campos.js');
-const { existenteEmail, existeUsuarioById } = require('../helpers/db-validators');
+const router = new Router();
 
-const { usuarioPost, usuarioGet, usuarioDelete, usuarioLogin } = require('../usuario/user.controller.js');
-
-const router = Router();
-
-router.get("/", usuarioGet);
-
-router.get(
-    "/:id",
-    [
-        check("id", "El id no es un formato válido de MongoDB").isMongoId(),
-        check("id").custom(existeUsuarioById),
-        validarCampos
-    ]);
-
-router.delete(
-    "/:id",
-    [
-        check("id", "El id no es un formato válido de MongoDB").isMongoId(),
-        check("id").custom(existeUsuarioById),
-        validarCampos
-    ], usuarioDelete);
-
+router.get('/', userGet);
 
 router.post(
-    "/",
-    [
-        check("nombre", "El nombre es obligatorio").not().isEmpty(),
-        check("contra", "La contraseña debe tener más de 6 digitos").isLength({ min: 6, }),
-        check("email", "El email debe ser un email").isEmail(),
-        check("email").custom(existenteEmail),
-        validarCampos,
-    ], usuarioPost);
+  '/',
+  [
+    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('email', 'El email es obligatorio').isEmail(),
+    check('email').custom(existenteEmail),
+    check('contra', 'La contraseña es obligatoria').isLength({ min: 6 }),
+    validarCampos,
+  ],
+  userPost
+);
 
-router.post(
-    "/login",
-    [
-        check('email', 'Este correo no es aceptado, pruebe otro').isEmail(),
-        check('contra', 'la contraseña es obligatoria').not().isEmpty(),
-        validarCampos,
-    ],
-    usuarioLogin);
-
-module.exports = router;
+export default router;
