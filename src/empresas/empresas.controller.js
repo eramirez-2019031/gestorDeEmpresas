@@ -77,4 +77,23 @@ export const businessGET = async (req, res = response) => {
   }
 };
 
+export const empresaPut = async (req, res) => {
+  const { id } = req.params;
+  const { _id, ...resto } = req.body;
+
+  const empresa = await Empresa.findByIdAndUpdate(id, resto);
+  res.status(200).json({
+      msg: 'La Empresa fue  actualizada Correctamente'
+  })
+}
+
+export const getEmpresaByid = async (req, res) => {
+  const { id } = req.params;
+  const empresa = await Empresa.findOne({ _id: id });
+  res.status(200).json({
+      empresa
+  });
+}
+
+
   
