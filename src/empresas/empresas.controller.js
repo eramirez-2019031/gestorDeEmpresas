@@ -87,13 +87,49 @@ export const empresaPut = async (req, res) => {
   })
 }
 
-export const getEmpresaByid = async (req, res) => {
-  const { id } = req.params;
-  const empresa = await Empresa.findOne({ _id: id });
-  res.status(200).json({
-      empresa
-  });
-}
+export const empresaReportGet = async (req, res = response) => {
+  try {
+    const empresas = await empresaModel.find();
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Businesses");
+
+    worksheet.addRow([
+      "Nombre",
+      "Nivel de Impacto",
+      "Años de experiencia",
+      "Categoria",
+    ]);
+
+    empresas.forEach((empresa) => {
+      worksheet.addRow([
+        empresa.npmbreE,
+        empresa.nivelImpacto,
+        empresa.años,
+        empresa.años,
+      ]);
+    });
+
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="negocios.xlsx"'
+    );
+
+    await workbook.xlsx.write(res);
+
+    res.end();
+  } catch (error) {
+    console.error("Error al crear reporte:", error);
+    return res.status(500).json({
+      error: "Error",
+    });
+  }
+};
+
+
 
 
   

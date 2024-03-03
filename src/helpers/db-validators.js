@@ -22,3 +22,11 @@ export const existenteEmpresa = async (nombreE = '') => {
         throw new Error(`El Nombre ${ nombreE } ya fue registrado`);
     }
 }
+
+export const existeEmpresaById = async ( id = '') => {
+    const existeEmpresa = await Empresa.findOne({id});
+    if(existeEmpresa){
+        throw new Error(`El usuario con el id: ${ id } no existe`);
+    }
+}
+
