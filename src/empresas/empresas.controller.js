@@ -24,5 +24,57 @@ export const empresaPost = async (req, res) => {
         total,
         empresa
     });
-} 
+}
+
+export const businessGET = async (req, res = response) => {
+  const { order } = req.params;
+
+  let sortBy, orderBy;
+
+  switch (parseInt(order)) {
+    case 1:
+      sortBy = "nombre";
+      orderBy = "asc";
+      break;
+    case 2:
+      sortBy = "nombre";
+      orderBy = "desc";
+      break;
+    case 3:
+      sortBy = "años";
+      orderBy = "asc";
+      break;
+    case 4:
+      sortBy = "años";
+      orderBy = "desc";
+      break;
+    case 5:
+      sortBy = "categoria";
+      orderBy = "asc";
+      break;
+    case 6:
+      sortBy = "categoria";
+      orderBy = "desc";
+      break;
+    default:
+      sortBy = "nombre";
+      orderBy = "asc";
+      break;
+  }
+
+  try {
+    const empresa = await businessModel.find().sort({ [sortBy]: orderBy });
+
+    res.status(200).json({
+      empresa,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "No se pudo",
+      error: error.message,
+    });
+  }
+};
+
   

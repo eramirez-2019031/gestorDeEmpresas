@@ -19,4 +19,9 @@ router.post(
   empresaPost
 );
 
+router.get("/:order", [validarJWT, validarCampos], businessGET);
+// Para cuando no le manden el orden
+router.get("/", [validarJWT, validarCampos], businessGET);
+
+
 export default router;
