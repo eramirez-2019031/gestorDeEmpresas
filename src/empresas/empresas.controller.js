@@ -1,6 +1,7 @@
 import { response, request } from 'express';
 import bcryptjs from 'bcryptjs';
 import Empresa from './empresas.model.js';
+import ExcelJS from "exceljs";
 
 export const empresaPost = async (req, res) => {
     const { nombreE, nivelImpacto, años, categoria } = req.body;
@@ -89,7 +90,7 @@ export const empresaPut = async (req, res) => {
 
 export const empresaReportGet = async (req, res = response) => {
   try {
-    const empresas = await empresaModel.find();
+    const empresas = await Empresa.find();
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Empresas");
 
