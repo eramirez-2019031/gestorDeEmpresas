@@ -7,6 +7,7 @@ import morgan from 'morgan'
 import { dbConnection } from './mongo.js';
 import userRoutes from '../src/usuario/user.routes.js';
 import empresasRoutes from '../src/empresas/empresas.routes.js';
+import empresaReporte from '../src/empresas/empresaReporte.js';
 
 class Server{
     constructor(){
@@ -14,6 +15,8 @@ class Server{
         this.port = process.env.PORT;
         this.usuarioPath = '/api/v1/users'
         this.empresasPath = '/api/v1/empresa'
+        this.reportePath = '/empresaAPI/v1/report';
+
 
         this.middlewares();
         this.conectarDB();
@@ -35,11 +38,12 @@ class Server{
     routes(){
         this.app.use(this.usuarioPath, userRoutes);
         this.app.use(this.empresasPath, empresasRoutes);
+        this.app.use(this.reportePath, empresaReporte);
     }
 
     listen(){
         this.app.listen(this.port, () => {
-            console.log('Server running on port', this.port);
+            console.log('Servidor corriendo', this.port);
         });
     }
 }

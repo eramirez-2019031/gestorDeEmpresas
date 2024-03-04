@@ -1,7 +1,9 @@
 import { response, request } from 'express';
 import bcryptjs from 'bcryptjs';
 import Empresa from './empresas.model.js';
-import ExcelJS from "exceljs";
+import ExcelJS from 'exceljs' ;
+import User from '../usuario/user.model.js'
+import empresasModel from './empresas.model.js';
 
 export const empresaPost = async (req, res) => {
     const { nombreE, nivelImpacto, años, categoria } = req.body;
@@ -27,7 +29,7 @@ export const empresaPost = async (req, res) => {
     });
 }
 
-export const businessGET = async (req, res = response) => {
+export const empresaFiltro = async (req, res = response) => {
   const { order } = req.params;
 
   let sortBy, orderBy;
@@ -64,7 +66,7 @@ export const businessGET = async (req, res = response) => {
   }
 
   try {
-    const empresa = await businessModel.find().sort({ [sortBy]: orderBy });
+    const empresa = await empresasModel.find().sort({ [sortBy]: orderBy });
 
     res.status(200).json({
       empresa,
